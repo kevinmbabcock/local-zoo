@@ -8,8 +8,14 @@ import { Animal } from './animal.model';
       <div class="jumbotron">
         <h1>Local Neighborhood Zoo</h1>
       </div>
-
-      <animal-list [childAnimalList]="masterAnimalList" (clickSender)="editAnimal($event)"></animal-list>
+      <div class="row">
+        <div class="col-md-6">
+          <animal-list [childAnimalList]="masterAnimalList" (clickSender)="editAnimal($event)"></animal-list>
+        </div>
+        <div class="col-md-6">
+          <add-animal (newAnimalSender)="addAnimal($event)"></add-animal>
+        </div>
+      </div>
     </div>
   `
 })
@@ -21,4 +27,9 @@ export class AppComponent {
     new Animal('Northwest Black Tailed Deer', 'Tinkerbell', 8, 'Herbivore', 'Northern Trail', 2, 'Female', 'Delicate roots and leaves', 'Loud noises')
   ];
 
+  selectedAnimal = null;
+
+  addAnimal(newAnimalFromChild: Animal) {
+   this.masterAnimalList.push(newAnimalFromChild);
+  }
 }
